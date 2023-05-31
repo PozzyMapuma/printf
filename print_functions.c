@@ -120,3 +120,56 @@ int print _int(va_list types, char buffer[],
   {
     num = (unsigned long int)((-1) * n);
     is_negative = 1;
+    while (num > 0)
+    {
+      buffer[a--] = (num % 10) + '0';
+      num /= 10;
+    }
+    a++;
+    return (write_number(is_negative, a, buffer, flags, width, precision, size));
+  }
+  /*************************PRINT BINARY************************/
+  /**
+   *print_binary - prints the unsigned number
+   *@types: list of the arguments
+   *@flags: calculates the active flags
+   *@buffer: buffer array to handle the print
+   *@width: get the width
+   *@precision:specification of the precision
+   *@size: specify the size
+   *Return: the number of the chars printed
+   */
+  int print_binary(va_list types, char buffer[],
+                   int flags, int width, int precision, int size)
+  {
+    unsigned int t,k,i,sum;
+    unsigned int b[32];
+    int count;
+    
+    UNUSED(buffer);
+    UNUSED(flags);
+    UNUSED(width);
+    UNUSED(precision);
+    UNUSED(size);
+    t = va_arg(types, unsigned int);
+    k = 2147483648; /* (2 ^ 31) */
+    b[0] = t / k;
+    for (i = 1; i < 32; i++)
+    {
+      k /= 2;
+      b[i] = (t / k) % 2;
+    }
+    for (i = 0, sum = 0, count = 0; i < 32; i++)
+    {
+      sum += b[i];
+      if (sum || i == 31)
+      {
+        char z = '0' + b[i];
+        write(1, &z, 1);
+        count++;
+      }
+    }
+    return (count);
+  }
+  
+ 
