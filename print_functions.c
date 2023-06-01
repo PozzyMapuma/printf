@@ -1,8 +1,8 @@
 #include 'main.h'
 /***********************PRINT CHAR*************************/
 /**
- *print_char - prints a char
- *@types: list a of the arguments
+ *print_char -prints an char
+ *@types: the list a of the arguments
  *@butter: buffer the array to handle the print
  *@flags: calculates the active flags
  *@precision: specification precision
